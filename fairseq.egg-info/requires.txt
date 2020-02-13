@@ -1,0 +1,9 @@
+cffi
+cython
+fastBPE
+numpy
+regex
+sacrebleu
+torch
+tqdm
+scipy
