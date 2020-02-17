@@ -2,10 +2,10 @@
 
 Implementation for the paper "MC-BERT: Efficient Language Pre-Training via a Meta Controller",  which has been submitted to ICML'2020.
 
-### Brief Introduction
+## Brief Introduction
 This repo is built for the experimental codes in our paper, containing all the model implementation, data preprocessing, and parameter settings. Here we thank the authors of the codebase, [fairseq](https://github.com/pytorch/fairseq), and our repo is upgraded from it. So more details and usages on fairseq please see the original repo.
 
-### Upgrades
+## Upgrades
 
 #### General
 1. Add metrics for down-stream tasks. Except for the original accuracy metric, we add pearson_spearman, F1, MCC for various down-stream tasks in GLUE, see the `critetions/sentence_prediction.py` for sentence prediction.
@@ -20,7 +20,7 @@ This repo is built for the experimental codes in our paper, containing all the m
 1. Add the meta controller and the other logics, in the model definition file, see the new folder `mcbert` in `models`.
 2. Define a new loss in criterions, see `mcbert.py` in `criterions`;  a new task, see `mcbert.py` in `tasks`.
 
-# Requirements and Installation
+## Requirements and Installation
 
 More details see [fairseq](https://github.com/pytorch/fairseq). Berifly,
 
@@ -38,24 +38,24 @@ cd MC-BERT
 pip install --editable .
 ```
 
-# Getting Started
+## Getting Started
 
-## Overall Usage
+### Overall Usage
 The [full documentation](https://fairseq.readthedocs.io/) of fairseq contains instructions for getting started, training new models and extending fairseq with new model types and tasks.
 
-## Data Pre-Processing
+### Data Pre-Processing
 
-### Pretraining Data
+#### Pretraining Data
 We follow a couple of consecutive pre-processing steps: segmenting documents into sentences by Spacy, normalizing, lower-casing, and tokenizing the texts by Moses decoder, and finally, applying byte pair encoding (BPE) with setting the vocabulary size |V| as 32,678. The preprocess code refers to `preprocess/pretrain/process.sh`.
 
-### Down-Stream Data
+#### Down-Stream Data
 Follow the procedure as the above one, we process the GLUE by `preprocess/glue/process.sh`.
 
 When reproducing, please modify some related file paths.
 
-## Pre-Training Usage
+### Pre-Training Usage
 
-### ELECTRA
+#### ELECTRA
 For pre-training ELECTRA model, you can refer to the following:
 ```bash
 #!/usr/bin/env bash
@@ -85,7 +85,7 @@ python train.py ${DATA_DIR} --fp16 --num-workers 4 --ddp-backend=no_c10d \
        --save-interval-updates 10000 --keep-interval-updates 5 --no-epoch-checkpoints --skip-invalid-size-inputs-valid-test \
        --save-dir ../saved_cp/electra-${EXEC_ID}
 ```
-### MC-BERT
+#### MC-BERT
 For pretrainning MC-BERT model, you can refer to the following:
 ```bash
 #!/usr/bin/env bash
@@ -116,7 +116,7 @@ python train.py ${DATA_DIR} --fp16 --num-workers 4 --ddp-backend=no_c10d \
        --save-dir ../saved_cp/mcbert-${EXEC_ID}
 ```
 
-## Fine-tuning
+### Fine-tuning
 After setting hyperparameters, you can fine-tune the model by:
 
 ```bash
