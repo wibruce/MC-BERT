@@ -145,7 +145,7 @@ do
 	    sed 's/\\/ /g' | \
 	    $COMMON_PATH/mosesdecoder/scripts/tokenizer/tokenizer.perl -threads 8 -no-escape -l en | \
 	    gawk '{print tolower($0);}' > $TASK_DATA_FOLDER/processed/${SPLIT}.tok.$LANG.tmp
-	$COMMON_PATH/subword-nmt/subword_nmt/apply_bpe.py -c ${BPE_CODE_PATH} < $TASK_DATA_FOLDER/processed/${SPLIT}.tok.$LANG.tmp > $TASK_DATA_FOLDER/processed/$SPLIT.$LANG
+	$COMMON_PATH/fastBPE/fast applybpe $TASK_DATA_FOLDER/processed/$SPLIT.$LANG $TASK_DATA_FOLDER/processed/${SPLIT}.tok.$LANG.tmp ${BPE_CODE_PATH}
       rm $TASK_DATA_FOLDER/processed/${SPLIT}.tok.$LANG.tmp
     done
   done

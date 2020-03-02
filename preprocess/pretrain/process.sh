@@ -54,15 +54,14 @@ cat old_corpus.valid.tok > corpus.valid.tok
 cat corpus.train.tok | \
 python concat_short_sentences.py | \
 python ../common/length_filter_by_char.py 20 1000000 > corpus.train.tok.tmp
-# ../common/fastBPE/fast applybpe corpus.train.tok.bpe corpus.train.tok.tmp bpe-code
-../common/subword-nmt/subword_nmt/apply_bpe.py -c bpe-code < corpus.train.tok.tmp > corpus.train.tok.bpe
+../common/fastBPE/fast applybpe corpus.train.tok.bpe corpus.train.tok.tmp bpe-code
+
 rm corpus.train.tok.tmp
 
 cat corpus.valid.tok | \
 python concat_short_sentences.py | \
 python ../common/length_filter_by_char.py 20 1000000 > corpus.valid.tok.tmp
-# ../common/fastBPE/fast applybpe corpus.valid.tok.bpe corpus.valid.tok.tmp bpe-code
-../common/subword-nmt/subword_nmt/apply_bpe.py -c bpe-code < corpus.train.tok.tmp > corpus.train.tok.bpe
+../common/fastBPE/fast applybpe corpus.valid.tok.bpe corpus.valid.tok.tmp bpe-code
 rm corpus.valid.tok.tmp
 
 # cd ../..
